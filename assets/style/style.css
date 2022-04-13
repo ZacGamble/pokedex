@@ -1,0 +1,5 @@
+/* BASIC STYLES HERE */
+.all-pokemon{
+    max-height: 100%;
+    overflow-y: auto;
+  }
