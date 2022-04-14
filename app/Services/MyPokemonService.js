@@ -8,7 +8,7 @@ class MyPokemonService{
         if(!foundPokemon){
             window.alert('nope!')
         }
-         const res = await sandboxApi.post('zac/pokemon', ProxyState.activePokemon)
+         const res = await sandboxApi.post('zac/pokemon/', ProxyState.activePokemon)
         ProxyState.myPokemon = [...ProxyState.myPokemon, new Pokemon(res.data)]
     }
     setActivePokemon(pokemonId) {
@@ -20,10 +20,10 @@ class MyPokemonService{
         await sandboxApi.delete('zac/pokemon/' + pokemonId)
         // NOTE this is for the toast notification in the controller
         ProxyState.activePokemon = null
-        return ProxyState.myPokemon.find(s => s.id == pokemonId)
+        return ProxyState.myPokemon.find(p => p.id == pokemonId)
       }
     async getMyPokemon() {
-        const res = await sandboxApi.get('zac/pokemon')
+        const res = await sandboxApi.get('zac/pokemon/')
         console.log(res.data, 'hi from My pokemon Service');
         ProxyState.myPokemon = res.data.map(p => new Pokemon(p))
     }

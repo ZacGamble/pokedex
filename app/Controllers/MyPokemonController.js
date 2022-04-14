@@ -4,7 +4,7 @@ import { Pop } from "../Utils/Pop.js";
 
 function _drawMyPokemon() {
     let template = ''
-    ProxyState.myPokemon.forEach(p => template += /*html*/ `<li class="selectable p-2 border-bottom d-flex justify-content-between" onclick="app.myPokemonController.setActivePokemon('${p.id}')"> ${p.name}<span class="mdi mdi-delete on-hover align-self-end" onclick="app.myPokemonController.removePokemon('${p.name}')"> 
+    ProxyState.myPokemon.forEach(p => template += /*html*/ `<li class="selectable p-2 border-bottom d-flex justify-content-between" onclick="app.myPokemonController.setActivePokemon('${p.id}')"> ${p.name}<span class="mdi mdi-delete on-hover align-self-end" onclick="app.myPokemonController.removePokemon('${p.id}')"> 
     </li>
     `
     )
@@ -13,7 +13,10 @@ function _drawMyPokemon() {
 export class MyPokemonController{
 constructor(){
     this.getMyPokemon()
+    ProxyState.on('pokemon', _drawMyPokemon)
     ProxyState.on('myPokemon', _drawMyPokemon)
+    ProxyState.on('activePokemon', _drawMyPokemon)
+
         }
         setActivePokemon(pokemonId){
             try {
@@ -40,9 +43,9 @@ constructor(){
             console.log(error);
         }
     }
-    async removePokemon(PokemonName) {
+    async removePokemon(PokemonId) {
         try {
-          const removedPokemon = await myPokemonService.removePokemon(PokemonName)
+          const removedPokemon = await myPokemonService.removePokemon(PokemonId)
           Pop.toast(`${removedPokemon.name} has been removed!`, 'success')
         } catch (error) {
           Pop.toast(error.message, 'error')

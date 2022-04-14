@@ -21,6 +21,7 @@ constructor(){
     this.getApiPokemon()
    ProxyState.on('pokemon', _drawPokemon) 
    ProxyState.on('activePokemon', _drawActivePokemon)
+   ProxyState.on('myPokemon',_drawActivePokemon)
 }
 async getApiPokemon(){
     try {

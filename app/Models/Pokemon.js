@@ -1,6 +1,7 @@
 
 export class Pokemon{
     constructor(data){
+        this.id = data.id || ''
         this.name = data.name || ''
         this.nickName = data.nickName || ''
         this.img = data.img || data.sprites.front_default
