@@ -30,6 +30,20 @@ async getApiPokemon(){
         console.log('could not fetch pokemon');
     }
 }
+async findPokemon(){
+    window.event.preventDefault();
+    try {
+        let form = window.event?.target
+        const formData = {
+            name: form.name.value
+        }
+        console.log(formData);
+
+        await apiPokemonService.findPokemon(formData)
+    } catch (error) {
+        console.error("SOmething went wrong :/")
+    }
+}
 async setActivePokemon(pokemonIndex){
     try {
     await apiPokemonService.setActivePokemon(pokemonIndex)
